@@ -4,6 +4,12 @@ This Data Platform is inspired by the IBM Data Engineering Capstone Project on C
 
 ![ecommerce_architecture](./ecommerce_architecture.jpg)
 
+This project is intentionally designed as a **data engineering platform** rather than a fully connected **data movement pipeline**. Each module operates independently to **simulate different aspects of data engineering workflows**—from OLTP databases to big data analytics—within a unified environment. As a result, **data is not interconnected between modules**.  
+
+This modular approach makes the platform a **strong foundation for future data engineering projects**, enabling **flexible experimentation, scalable expansion, and seamless integration of new components** as needed. 
+
+---
+
 ## **Project Overview**
 
 The goal is to build a fully functional **data pipeline** that includes:

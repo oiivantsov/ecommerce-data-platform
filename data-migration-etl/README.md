@@ -55,12 +55,6 @@ To migrate data from **MySQL (OLTP) → PostgreSQL (Data Warehouse)**, run:
 python automation.py
 ```
 
-### **What Happens During Migration?**
-✅ Extracts **new transactional data** from MySQL.  
-✅ Transforms the data to match the Data Warehouse schema.  
-✅ Loads the transformed data into PostgreSQL.  
-✅ Ensures **MySQL and PostgreSQL are synchronized**.
-
 ---
 
 ## **Monitoring & Debugging**
