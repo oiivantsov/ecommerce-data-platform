@@ -1,0 +1,56 @@
+version: '3.8'
+
+services:
+  mysql:
+    image: mysql:latest
+    container_name: mysql_server
+    environment:
+      MYSQL_ROOT_PASSWORD: 5555
+      MYSQL_DATABASE: sales
+      MYSQL_USER: appuser
+      MYSQL_PASSWORD: 1234
+    ports:
+      - "3307:3306"
+    volumes:
+      - ./mysql-init:/docker-entrypoint-initdb.d
+      - mysql_data_etl:/var/lib/mysql
+    networks:
+      - etl_network
+
+  postgres:
+    image: postgres:latest
+    container_name: postgres_server
+    environment:
+      POSTGRES_USER: db_owner
+      POSTGRES_PASSWORD: 5555
+      POSTGRES_DB: sales
+    ports:
+      - "5432:5432"
+    volumes:
+      - ./psql-data:/data
+      - pg_data_etl:/var/lib/postgresql/data
+    networks:
+      - etl_network
+
+  python:
+    image: python:3.11
+    container_name: python_etl
+    volumes:
+      - ./scripts:/scripts
+      - ./requirements.txt:/requirements.txt
+    working_dir: /scripts
+    depends_on:
+      - mysql
+      - postgres
+    networks:
+      - etl_network
+    command: /bin/bash -c "pip install -r /requirements.txt && tail -f /dev/null"
+
+
+networks:
+  etl_network:
+    driver: bridge
+
+volumes:
+  mysql_data_etl:
+  pg_data_etl:

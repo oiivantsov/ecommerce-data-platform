@@ -1,0 +1,35 @@
+version: '3.8'
+
+services:
+  mysql:
+    image: mysql:latest
+    container_name: mysql_container
+    restart: always
+    command: --local-infile=1 # Enable LOAD DATA LOCAL INFILE
+    environment:
+      MYSQL_ROOT_PASSWORD: 5555
+      MYSQL_DATABASE: sales
+      MYSQL_USER: appuser
+      MYSQL_PASSWORD: 1234
+    ports:
+      - "3307:3306" # change if port 3306 is already in use
+    volumes:
+      - mysql_data:/var/lib/mysql # Persistent MySQL storage
+      - ./mysql-init:/docker-entrypoint-initdb.d # Auto-run SQL scripts
+
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    container_name: phpmyadmin
+    restart: always
+    environment:
+      PMA_HOST: mysql
+      PMA_PORT: 3306
+      PMA_USER: root
+      PMA_PASSWORD: 5555
+    ports:
+      - "8080:80"
+    depends_on:
+      - mysql
+
+volumes:
+  mysql_data:
