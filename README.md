@@ -18,7 +18,7 @@ The goal is to build a fully functional **data pipeline** that includes:
 - [NoSQL MongoDB database](./nosql/) for product catalog storage
 - [Data Warehouse (DWH)](./data-warehouse/) for analytical queries
 - ETL pipelines for [data migration](./data-migration-etl/) and [web service analytics](./airflow-etl/)
-- [Big Data Analytics](./bigdata/) using Apache Spark ML
+- [Big Data Analytics](./spark/) using Apache Spark ML
 
 All modules are **Dockerized**, making it easy to run and develop within an isolated environment.
 
